@@ -24,7 +24,7 @@ node{
          }
         sh "docker push ${dockerImageName}"
       }
-      
+     
     stage('Run Docker Image'){
             def dockerContainerName = 'javadockerapp_$JOB_NAME_$BUILD_NUMBER'
             def changingPermission='sudo chmod +x stopscript.sh'
