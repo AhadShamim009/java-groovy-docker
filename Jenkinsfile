@@ -1,5 +1,5 @@
 node{
-      def dockerImageName= 'dockerahad/javadedockerapp_$JOB_NAME:$BUILD_NUMBER'
+      def dockerImageName= 'dockerahad/javademoapp_$JOB_NAME:$BUILD_NUMBER'
       stage('SCM Checkout'){
          git 'https://github.com/AhadShamim009/java-groovy-docker.git'
       }
@@ -31,11 +31,11 @@ node{
             def scriptRunner='sudo ./stopscript.sh'           
             def dockerRun= "sudo docker run -p 8082:8080 -d --name ${dockerContainerName} ${dockerImageName}" 
             withCredentials([string(credentialsId: 'deploymentserverpwd', variable: 'dpPWD')]) {
-                  sh "sshpass -p ${dpPWD} ssh -o StrictHostKeyChecking=no ubuntu@172.31.23.253" 
-                  sh "sshpass -p ${dpPWD} scp -r stopscript.sh ubuntu@172.31.23.253:/home/ubuntu" 
-                  sh "sshpass -p ${dpPWD} ssh -o StrictHostKeyChecking=no ubuntu@172.31.23.253 ${changingPermission}"
-                  sh "sshpass -p ${dpPWD} ssh -o StrictHostKeyChecking=no ubuntudevops@172.31.23.253 ${scriptRunner}"
-                  sh "sshpass -p ${dpPWD} ssh -o StrictHostKeyChecking=no ubuntu@172.31.23.253 ${dockerRun}"
+                  sh "sshpass -p ${dpPWD} ssh -o StrictHostKeyChecking=no ubuntu@172.29.164.117" 
+                  sh "sshpass -p ${dpPWD} scp -r stopscript.sh ubuntu@172.29.164.117:/home/ubuntu" 
+                  sh "sshpass -p ${dpPWD} ssh -o StrictHostKeyChecking=no ubuntu@172.29.164.117 ${changingPermission}"
+                  sh "sshpass -p ${dpPWD} ssh -o StrictHostKeyChecking=no ubuntu@172.29.164.117 ${scriptRunner}"
+                  sh "sshpass -p ${dpPWD} ssh -o StrictHostKeyChecking=no ubuntu@172.29.164.117 ${dockerRun}"
             }
             
       
